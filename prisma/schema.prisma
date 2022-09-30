@@ -1,0 +1,85 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Game {
+  id Int @id @default(autoincrement())
+
+  start                 DateTime
+  server_id             String
+  blue_expected_winrate Float
+  winner                String
+
+  participants GameParticipant[]
+}
+
+model GameParticipant {
+  id Int @id @default(autoincrement())
+
+  side String
+  role String
+
+  player_id        String
+  player_server_id String
+
+  champion_id     Int
+  name            String
+  trueskill_mu    Float
+  tureskill_sigma Float
+
+  Game    Game?  @relation(fields: [game_id], references: [id])
+  Player  Player @relation(fields: [player_id], references: [id])
+  game_id Int?
+}
+
+model Channel {
+  id           String        @id
+  server_id    String
+  channel_type String
+  QueuePlayer  QueuePlayer[]
+}
+
+model Player {
+  id String @id
+
+  server_id String
+
+  name String
+  team String?
+
+  ratings         PlayerRating[]
+  QueuePlayer     QueuePlayer[]
+  GameParticipant GameParticipant[]
+}
+
+model PlayerRating {
+  id Int @id @default(autoincrement())
+
+  player_id        String
+  player_server_id String
+
+  trueskill_mu    Float
+  trueskill_sigma Float
+
+  Player Player? @relation(fields: [player_id], references: [id])
+}
+
+model QueuePlayer {
+  id Int @id @default(autoincrement())
+
+  channel_id     String
+  player_id      String
+  role           String
+  ready_check_id String?
+
+  Channel Channel? @relation(fields: [channel_id], references: [id])
+  Player  Player?  @relation(fields: [player_id], references: [id])
+}
