@@ -19,7 +19,7 @@ export class BaseCommand {
     this.bot = bot;
     this.client = client;
     this.name = name;
-    this.requiresAdmin = this.requiresAdmin;
+    this.requiresAdmin = requiresAdmin;
   }
 
   registerCommand(command: Function, commandName: string) {

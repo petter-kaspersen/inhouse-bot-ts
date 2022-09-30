@@ -21,7 +21,7 @@ export default class CommandHandler {
   }
 
   async checkIfCommand(message: Message): Promise<ICommand | false> {
-    for await (let command of this.commands) {
+    for await (let { ...command } of this.commands) {
       if (message.content.toLowerCase().startsWith(command.instruction)) {
         if (!command.props.length) return command;
 

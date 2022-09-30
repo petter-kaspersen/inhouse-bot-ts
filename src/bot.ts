@@ -4,6 +4,7 @@ import { Client, GatewayIntentBits, Message, Partials } from "discord.js";
 import CommandHandler from "./handlers/command-handler";
 import AdminCommand from "./commands/admin";
 import { QueueChannelHandler } from "./handlers/queue-channel-handler";
+import QueueCommand from "./commands/queue";
 
 const IS_DEV = process.env.DEV === "true" ? true : false;
 const DISCORD_TOKEN = IS_DEV
@@ -11,7 +12,7 @@ const DISCORD_TOKEN = IS_DEV
   : process.env.DISCORD_BOT_TOKEN;
 
 export class Bot {
-  private client: Client = new Client({
+  public client: Client = new Client({
     intents: [
       GatewayIntentBits.Guilds,
       GatewayIntentBits.GuildMessages,
@@ -50,6 +51,10 @@ export class Bot {
     this.commandHandler.registerCommand(
       new AdminCommand(this, this.client, "Admin")
     );
+
+    this.commandHandler.registerCommand(
+      new QueueCommand(this, this.client, "Queue")
+    );
   }
 
   addMessageListener() {
@@ -77,10 +82,7 @@ export class Bot {
   }
 
   start() {
-    this.client.login(
-      DISCORD_TOKEN ??
-        "MTAyMTE2NzMwMzU2MTMyMjYzNw.GBHM1_.xBEXZ_OJs3yYjM2wWNcp9XIqIr4Z9GEwys_wfk"
-    );
+    this.client.login(DISCORD_TOKEN ?? "");
   }
 }
 

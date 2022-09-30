@@ -79,7 +79,8 @@ model QueuePlayer {
   player_id      String
   role           String
   ready_check_id String?
+  server_id      String
 
-  Channel Channel? @relation(fields: [channel_id], references: [id])
-  Player  Player?  @relation(fields: [player_id], references: [id])
+  Channel Channel? @relation(fields: [channel_id], references: [id], onDelete: Cascade)
+  Player  Player?  @relation(fields: [player_id], references: [id], onDelete: Cascade)
 }

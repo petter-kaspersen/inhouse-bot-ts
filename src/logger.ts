@@ -8,4 +8,8 @@ export class Logger {
 
     console.info(...data);
   }
+
+  static Info(...data: unknown[]) {
+    console.info(...data);
+  }
 }
