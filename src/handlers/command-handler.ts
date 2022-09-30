@@ -1,5 +1,5 @@
 import { Message } from "discord.js";
-import { BaseCommand } from "../../lib/command/command";
+import { BaseCommand } from "../command";
 
 export type CommandProp = string;
 

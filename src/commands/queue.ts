@@ -1,5 +1,5 @@
 import { Client, Message } from "discord.js";
-import { BaseCommand } from "../../lib/command/command";
+import { BaseCommand } from "../command";
 import { Bot } from "../bot";
 import { search } from "fast-fuzzy";
 import { ROLE_LIST } from "../constants/role";

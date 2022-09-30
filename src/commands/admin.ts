@@ -1,7 +1,6 @@
 import { Client, GuildMember, Message, TextChannel } from "discord.js";
-import { BaseCommand } from "../../lib/command/command";
+import { BaseCommand } from "../command";
 import { Bot } from "../bot";
-import CommandHandler from "../handlers/command-handler";
 import { resetQueue } from "../queue-handler";
 
 export default class AdminCommand extends BaseCommand {

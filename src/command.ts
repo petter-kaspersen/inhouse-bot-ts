@@ -1,6 +1,6 @@
 import { Base, Client } from "discord.js";
-import { Bot } from "../../src/bot";
-import { CommandProp, ICommand } from "../../src/handlers/command-handler";
+import { Bot } from "./bot";
+import { CommandProp, ICommand } from "./handlers/command-handler";
 
 export class BaseCommand {
   public bot: Bot;
