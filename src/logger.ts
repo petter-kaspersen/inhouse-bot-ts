@@ -10,6 +10,10 @@ export class Logger {
   }
 
   static Info(...data: unknown[]) {
-    console.info(...data);
+    console.info(`[INFO] - `, ...data);
+  }
+
+  static Error(...data: unknown[]) {
+    console.error(`[ERROR] - `, ...data);
   }
 }

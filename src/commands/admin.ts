@@ -1,7 +1,7 @@
 import { Client, GuildMember, Message, TextChannel } from "discord.js";
 import { BaseCommand } from "../command";
 import { Bot } from "../bot";
-import { resetQueue } from "../queue-handler";
+import { resetQueue, resetQueueForPlayer } from "../queue";
 
 export default class AdminCommand extends BaseCommand {
   constructor(bot: Bot, client: Client, name: string) {
@@ -9,7 +9,7 @@ export default class AdminCommand extends BaseCommand {
 
     this.registerCommand(this.mark, "admin mark <type>");
     this.registerCommand(this.unmark, "admin unmark");
-    this.registerCommand(this.reset, "admin reset <memberOrChannel?>");
+    this.registerCommand(this.reset, "admin reset");
   }
 
   async mark(message: Message, type: string) {
@@ -55,11 +55,17 @@ export default class AdminCommand extends BaseCommand {
     message.channel.send(`Removed current channel as queue channel.`);
   }
 
-  async reset(
-    message: Message,
-    memberOrChannel?: GuildMember | TextChannel | "here"
-  ) {
-    await resetQueue(message.channel.id);
+  async reset(message: Message) {
+    const mentionedUser = message.mentions.users.first();
+    if (mentionedUser) {
+      await resetQueueForPlayer(mentionedUser.id);
+      message.channel.send(
+        `Successfully reset queue for ${mentionedUser.username}`
+      );
+    } else {
+      await resetQueue(message.channel.id);
+    }
+
     await this.bot.queueChannelHandler.refreshChannelQueue(
       message.channel as TextChannel
     );

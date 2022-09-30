@@ -5,6 +5,7 @@ import CommandHandler from "./handlers/command-handler";
 import AdminCommand from "./commands/admin";
 import { QueueChannelHandler } from "./handlers/queue-channel-handler";
 import QueueCommand from "./commands/queue";
+import { Logger } from "./logger";
 
 const IS_DEV = process.env.DEV === "true" ? true : false;
 const DISCORD_TOKEN = IS_DEV
@@ -77,7 +78,13 @@ export class Bot {
       )
         return;
 
-      await isCommand.action(message, ...isCommand.props);
+      try {
+        await isCommand.action(message, ...isCommand.props);
+      } catch (e) {
+        Logger.Error(
+          `Something went wront executing the command ${isCommand.instruction}. Error message: ${e}`
+        );
+      }
     });
   }
 

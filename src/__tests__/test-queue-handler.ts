@@ -1,7 +1,7 @@
 import db from "../db/db";
 import { QueueChannelHandler } from "../handlers/queue-channel-handler";
 
-import { getPlayersInQueue, addPlayer, removePlayer } from "../queue-handler";
+import { getPlayersInQueue, addPlayer, removePlayer } from "../queue";
 
 beforeEach(async () => {
   await db.player.deleteMany();

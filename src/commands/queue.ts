@@ -3,7 +3,7 @@ import { BaseCommand } from "../command";
 import { Bot } from "../bot";
 import { search } from "fast-fuzzy";
 import { ROLE_LIST } from "../constants/role";
-import { addPlayer } from "../queue-handler";
+import { addPlayer } from "../queue";
 
 export default class QueueCommand extends BaseCommand {
   constructor(bot: Bot, client: Client, name: string) {

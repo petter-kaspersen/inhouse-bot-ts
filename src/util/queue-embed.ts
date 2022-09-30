@@ -1,38 +1,11 @@
-import { QueuePlayer } from "@prisma/client";
-import { Colors, Embed, EmbedBuilder, EmbedField } from "discord.js";
+import { Colors, Embed, EmbedBuilder } from "discord.js";
 import { ROLE_LIST } from "../constants/role";
-import { QueuePlayerReturn } from "../queue-handler/get-players-in-queue";
+import { QueuePlayerReturn } from "../queue/get-players-in-queue";
 import { getRoleEmoji } from "./emoji";
 
 export default function constructQueueEmbed(
   players: QueuePlayerReturn[]
 ): Partial<Embed> {
-  /* 
-    const embed = new EmbedBuilder()
-    .setColor("#d82e34")
-    .setTitle(
-      `Stats for ${stats[0].name} ${
-        role ? `in role ${role.toLowerCase()}` : ""
-      }`
-    )
-    .addFields(
-      {
-        name: "Games",
-        value: String(gamesPlayed),
-        inline: true,
-      },
-      {
-        name: "Win %",
-        value: `${winrate}%`,
-        inline: true,
-      }
-    )
-    .addFields({
-      name: `Top 3 champs`,
-      value: this.constructChampionString(topThree),
-    });
- */
-
   const fields: string[] = [];
 
   for (let role of ROLE_LIST) {

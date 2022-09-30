@@ -3,8 +3,7 @@ import { Client, Embed, TextChannel } from "discord.js";
 
 import db from "../db/db";
 import { Logger } from "../logger";
-import { getPlayersInQueue } from "../queue-handler";
-import { getPlayersInQueueByChannel } from "../queue-handler/get-players-in-queue";
+import { getPlayersInQueueByChannel } from "../queue/get-players-in-queue";
 import constructQueueEmbed from "../util/queue-embed";
 
 export class QueueChannelHandler {

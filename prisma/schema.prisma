@@ -55,7 +55,8 @@ model Player {
   name String
   team String?
 
-  ratings         PlayerRating[]
+  rating_id       Int? @unique
+  rating          PlayerRating?      @relation(fields: [rating_id], references: [id])
   QueuePlayer     QueuePlayer[]
   GameParticipant GameParticipant[]
 }
@@ -69,7 +70,7 @@ model PlayerRating {
   trueskill_mu    Float
   trueskill_sigma Float
 
-  Player Player? @relation(fields: [player_id], references: [id])
+  Player Player?
 }
 
 model QueuePlayer {
